@@ -61,7 +61,8 @@ public class RotaTest {
 		List<Yol> yolListesi = this.rota.getYolListesi();
 
 		Assert.assertThat(yolListesi.size(),
-		                  Matchers.is(2));
+		                  Matchers.allOf(Matchers.is(2),
+		                                 Matchers.greaterThan(0)));
 
 		Assert.assertThat(yolListesi.get(0),
 		                  Matchers.is(this.yol1));

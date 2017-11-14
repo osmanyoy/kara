@@ -5,11 +5,15 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.training.core.operations.AddOperation;
 
 public class AddOperationTest {
+
+	@InjectConnection(name = "osman")
+	public String connection;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -21,14 +25,24 @@ public class AddOperationTest {
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("@Before");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		System.out.println("@After");
 	}
 
+	@Rule
+	public MyCustomRule cRule = new MyCustomRule();
+
+	@Rule
+	public MyCustomRule2 rule2 = new MyCustomRule2();
+
 	@Test
+	@DBConnection(dbname = "osman")
 	public void testAddOperationExecute() {
+		System.out.println("testAddOperationExecute start : " + this.rule2.getConnection("osman"));
 		AddOperation addOperation = new AddOperation();
 		Assert.assertEquals(30,
 		                    addOperation.execute(10,
@@ -42,12 +56,28 @@ public class AddOperationTest {
 		Assert.assertEquals(10,
 		                    addOperation.execute(0,
 		                                         10));
+		System.out.println("testAddOperationExecute end");
 	}
 
 	@Test
-	public void testAddOperationMenu() {
-		AddOperation addOperation = new AddOperation();
-		Assert.assertEquals("Add",
-		                    addOperation.menuText());
+	@DBConnection(dbname = "mehmet")
+	public void testAddOperationExecute2() {
+		System.out.println("******  Injection : " + this.connection);
+		System.out.println("start : " + this.rule2.getConnection("mehmet"));
+
 	}
+
+	@Test
+	@DBConnection(dbname = "mehmet")
+	public void testAddOperationExecute3() {
+		System.out.println("start 3 : " + this.rule2.getConnection("mehmet"));
+
+	}
+
+	// @Test
+	// public void testAddOperationMenu() {
+	// AddOperation addOperation = new AddOperation();
+	// Assert.assertEquals("Add",
+	// addOperation.menuText());
+	// }
 }

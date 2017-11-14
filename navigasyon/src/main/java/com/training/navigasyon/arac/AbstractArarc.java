@@ -23,7 +23,7 @@ public abstract class AbstractArarc implements IArac {
 			return 0;
 		}
 		EYolTipi yolTipi = yol.getYolTipi();
-		return ((double) yol.getMesafe() / (double) this.ortalamaHiz) * yolTipi.getKatsayi();
+		return (((double) yol.getMesafe() / (double) this.ortalamaHiz) * yolTipi.getKatsayi());
 	}
 
 	@Override
