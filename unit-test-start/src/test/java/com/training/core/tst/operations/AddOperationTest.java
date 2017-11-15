@@ -1,5 +1,6 @@
 package com.training.core.tst.operations;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -7,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 
 import com.training.core.operations.AddOperation;
 
@@ -39,14 +41,25 @@ public class AddOperationTest {
 	@Rule
 	public MyCustomRule2 rule2 = new MyCustomRule2();
 
+	public ErrorCollector errorCollector = new ErrorCollector();
+
 	@Test
 	@DBConnection(dbname = "osman")
 	public void testAddOperationExecute() {
 		System.out.println("testAddOperationExecute start : " + this.rule2.getConnection("osman"));
 		AddOperation addOperation = new AddOperation();
-		Assert.assertEquals(30,
-		                    addOperation.execute(10,
-		                                         20));
+		this.errorCollector.checkThat(31,
+		                              Matchers.equalTo(addOperation.execute(10,
+		                                                                    20)));
+		this.errorCollector.checkThat(32,
+		                              Matchers.is(addOperation.execute(10,
+		                                                               20)));
+		this.errorCollector.checkThat(33,
+		                              Matchers.is(addOperation.execute(10,
+		                                                               20)));
+		this.errorCollector.checkThat(34,
+		                              Matchers.is(addOperation.execute(10,
+		                                                               20)));
 		Assert.assertEquals(0,
 		                    addOperation.execute(0,
 		                                         0));
