@@ -17,6 +17,9 @@ public class HelloManager {
 	}
 
 	public Hello getHelloByLanguage(final String language) {
+		Employee employee = new Employee();
+		System.out.println(employee.calculate());
+		System.out.println(employee.calculate());
 		String shortVersion = StaticUtility.shortVersion(this.changeString(language));
 		return this.map.get(shortVersion);
 	}
