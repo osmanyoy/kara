@@ -16,4 +16,14 @@ public class Operation implements IOperation {
 		                                 1));
 	}
 
+	@Override
+	public int getSize() {
+		return 3;
+	}
+
+	@Override
+	public int getRandom(final String str) {
+		return 100;
+	}
+
 }

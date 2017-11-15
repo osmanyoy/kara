@@ -18,4 +18,15 @@ public class OperationStub implements IOperation {
 		                                 3));
 	}
 
+	@Override
+	public int getSize() {
+		return 0;
+	}
+
+	@Override
+	public int getRandom(final String str) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
