@@ -70,6 +70,7 @@ public class MyRest {
 		return "OK";
 	}
 
+	@My
 	@RequestMapping(path = "/m")
 	public String method1() {
 		return ttt4.execute();

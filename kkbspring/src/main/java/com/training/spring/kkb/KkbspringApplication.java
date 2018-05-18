@@ -7,11 +7,17 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 //@SpringBootApplication(scanBasePackages= {"com.training.spring.kkb","d.e.f"})
 @SpringBootApplication
 @EnableConfigurationProperties
+@ServletComponentScan
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class KkbspringApplication implements ApplicationRunner{
 	
 	@Autowired

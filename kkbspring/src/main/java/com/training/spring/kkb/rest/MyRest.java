@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.spring.kkb.IMyInter;
 import com.training.spring.kkb.MyQAnno;
+import com.training.spring.kkb.security.MySecurity;
 
 @RestController
 @RequestMapping("/r")
@@ -40,10 +42,12 @@ public class MyRest {
 	private IMyInter inter3;
 
 	@RequestMapping("/m1")
+	@PreAuthorize("hasAuthority('yetkili')")
 	public String m1() {
 		return myImpl1.execute();
 	}
-
+	
+	@MySecurity(authority="yetkili")
 	@RequestMapping("/m2")
 	public String m2() {
 		return inter.execute();

@@ -2,10 +2,12 @@ package com.training.spring.kkb.jpa;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Future;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,6 +24,7 @@ public interface EmployeeDAO extends CrudRepository<Employee, Long> {
 	@Query(value = "select * from employee where name = :isim",nativeQuery=true)
 	List<Employee> employeeAl2(@Param("isim") String name);
 	
-	List<Employee> butunAl(@Param("isim") String name);
+	@Async
+	Future<Optional<List<Employee>>> butunAl(@Param("isim") String name);
 	
 }
