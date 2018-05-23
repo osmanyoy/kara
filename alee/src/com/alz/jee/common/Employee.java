@@ -1,10 +1,19 @@
 package com.alz.jee.common;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
+@Entity
 public class Employee {
+	
+	@Id
+	@GeneratedValue
+	private long empId;
+	
 	@QueryParam("isim")
 	private String name;
 	
@@ -31,6 +40,12 @@ public class Employee {
 	}
 	public void setAge(int age) {
 		this.age = age;
+	}
+	public long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(long empId) {
+		this.empId = empId;
 	}
 	
 	
