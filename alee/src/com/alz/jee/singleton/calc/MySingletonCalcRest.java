@@ -1,7 +1,6 @@
-package com.alz.jee.stateless.calc;
+package com.alz.jee.singleton.calc;
 
 import java.io.Serializable;
-import java.util.Queue;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -9,27 +8,28 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-@Path("/calc")
+@Path("/calc3")
 @SessionScoped
-public class MyCalcRest implements Serializable {
-
-	private int total;
+public class MySingletonCalcRest implements Serializable {
 	
 	@EJB
-	private MyCalcEJB mce ;
+	private MySingletonCalcEJB msce;
+	
+	@EJB
+	private MyTotalHolderEJB mthe;
 	
 	@Path("/add/{tutar}")
 	@GET
 	public int add(@PathParam("tutar") int amount) {
-		total = mce.add(total, amount);
-		return total;
+		mthe.setTotal(msce.add(mthe.getTotal(),amount));
+		return mthe.getTotal();
 	}
 	
 	@Path("/subs/{tutar}")
 	@GET
 	public int subs(@PathParam("tutar") int amount) {
-		total = mce.subs(total, amount);
-		return total;
+		mthe.setTotal(msce.subs(mthe.getTotal(),amount));
+		return mthe.getTotal();
 	}
 
 }

@@ -10,7 +10,8 @@ import javax.ejb.Stateless;
 @LocalBean
 public class MyCalcEJB {
 
-    /**
+    
+	/**
      * Default constru ctor. 
      */
     public MyCalcEJB() {
