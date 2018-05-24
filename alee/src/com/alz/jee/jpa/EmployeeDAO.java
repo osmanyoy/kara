@@ -8,9 +8,6 @@ import javax.persistence.PersistenceUnit;
 
 import com.alz.jee.common.Employee;
 
-/**
- * Session Bean implementation class EmployeeDAO
- */
 @Stateless
 @LocalBean
 public class EmployeeDAO {
