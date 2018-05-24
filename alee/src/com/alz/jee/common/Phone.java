@@ -17,7 +17,7 @@ public class Phone {
 	private String phoneNumber;
 	private String description;
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Employee employee;
 	
 	public String getPhoneNumber() {

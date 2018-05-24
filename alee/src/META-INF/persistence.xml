@@ -8,6 +8,7 @@
 		<class>com.alz.jee.common.Employee</class>
 		<class>com.alz.jee.common.Phone</class>
 		<class>com.alz.jee.common.Salary</class>
+		<class>com.alz.jee.customer.rest.Customer</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

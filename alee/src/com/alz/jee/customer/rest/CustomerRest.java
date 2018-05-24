@@ -1,7 +1,9 @@
 package com.alz.jee.customer.rest;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
@@ -31,7 +33,7 @@ public class CustomerRest implements Serializable {
 	@POST
 	@Path("/save")
 	public Response saveCustomer(@Valid Customer customer) {
-		try {
+		try {			
 			customerMap.put(customer.getId(),
 			                customer);
 			if (customer.getSurname()
