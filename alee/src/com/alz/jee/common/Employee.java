@@ -4,23 +4,42 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@NamedQueries({ @NamedQuery(query = "select e from Employee e where e.name = :isim", name = "get_by_name") })
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "calisan", indexes = { @Index(columnList = "isim,surname", name = "isim_soyisim_index") })
+@SecondaryTable(name = "extra")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Employee {
+
+	// @EmbeddedId
+	// private MyPrimaryKey primId;
 
 	@Id
 	@GeneratedValue
@@ -36,12 +55,19 @@ public class Employee {
 	private String surname;
 
 	@PathParam("yas")
+	@XmlElement(name = "yas")
 	private int age;
-	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+
+	@Column(table = "extra")
+	private String extra1;
+
+	@Column(table = "extra")
+	private String extra2;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Salary salary;
-	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="employee")
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "employee")
 	private List<Phone> phones;
 
 	public String getName() {
@@ -90,6 +116,22 @@ public class Employee {
 
 	public void setPhones(List<Phone> phones) {
 		this.phones = phones;
+	}
+
+	public String getExtra1() {
+		return extra1;
+	}
+
+	public void setExtra1(String extra1) {
+		this.extra1 = extra1;
+	}
+
+	public String getExtra2() {
+		return extra2;
+	}
+
+	public void setExtra2(String extra2) {
+		this.extra2 = extra2;
 	}
 
 }
