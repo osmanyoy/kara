@@ -20,7 +20,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.alz.jee.common.ErrorObject;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Path("/customer")
 @SessionScoped
